@@ -1,0 +1,71 @@
+import { shallowClone } from './utils.js'
+
+const changeKey = (newKey, value) => {
+    return {[newKey] : value}
+}
+
+const newObject = (oldObject, newObject) => {
+    return Object.assign(oldObject , newObject)
+}
+
+const changeValueAndKey = (newKey, clone) => {
+    const newValue = newKey[1](clone)
+
+    return changeKey(newKey[0], newValue)
+}
+
+class Renk {
+    constructor(struct  = {}){
+        this.struct = struct
+    }
+
+    /*
+        const animal = {name: "Lion", Height: 1.2}
+
+        const teste = new Renk(animal)
+
+        teste.renameOnly({ name: "Name"})
+
+        // { Name: "Lion", Height: 1.2 }
+
+    */
+
+    /*
+        const person = {firstName: "Luke", lastName: "Skywalker", eyeColor: blue}
+
+        const teste = new Renk(person)
+
+        teste.rename({ Height: ["fullName", person => `${person.firstName} ${person.lastName}`]})
+
+        // { fullName: Luke Skywalker, eyeColor: blue }
+
+    */
+
+    rename(renameKeys = {}){
+        const clone = shallowClone(this.struct)
+        let objectRenamed = {}
+        
+        Object.keys(clone).map(key => {
+            if(renameKeys.hasOwnProperty(key)){                
+                const newKey = renameKeys[key]
+                
+                const value = this.struct[key]
+                
+
+                if(Array.isArray(newKey)){
+                    objectRenamed = newObject(clone,changeValueAndKey(newKey, this.struct))
+                }else{
+                    objectRenamed = newObject(clone, changeKey(newKey, value))
+                }
+
+                delete clone[key]
+
+            }
+        })
+
+        return objectRenamed
+    }
+    
+}
+
+export default Renk
