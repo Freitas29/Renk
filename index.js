@@ -14,6 +14,10 @@ const changeValueAndKey = (newKey, clone) => {
     return changeKey(newKey[0], newValue)
 }
 
+const error = key => {
+    throw `key: ${key} not found in object`    
+}
+
 class Renk {
     constructor(struct  = {}){
         this.struct = struct
@@ -46,7 +50,7 @@ class Renk {
         let objectRenamed = {}
         
         Object.keys(clone).map(key => {
-            if(renameKeys.hasOwnProperty(key)){                
+            if(renameKeys.hasOwnProperty(key)){              
                 const newKey = renameKeys[key]
                 
                 const value = this.struct[key]
@@ -60,6 +64,8 @@ class Renk {
 
                 delete clone[key]
 
+            }else{
+                return error(key)
             }
         })
 
@@ -99,6 +105,8 @@ class Renk {
 
                 delete clone[key]
 
+            }else{
+                return error(key)
             }
         })
 
