@@ -8,15 +8,19 @@ const newObject = (oldObject, newObject) => {
     return Object.assign(oldObject , newObject)
 }
 
-const changeValueAndKey = (newKey, clone) => {
-    const newValue = newKey[1](clone)
+const isNotFunction = value => typeof value !== "function"
 
-    return changeKey(newKey[0], newValue)
+const changeValueAndKey = (newProperty, object) => {
+    const [key, value] = newProperty
+    
+    if(isNotFunction(value)) throw `${value} is not a function`
+
+    const newValue = value(object)
+
+    return changeKey(key, newValue)
 }
 
-const error = key => {
-    throw `key: ${key} not found in object`    
-}
+const keyNotFound = value => typeof value === "undefined"
 
 class Renk {
     constructor(struct  = {}){
@@ -63,9 +67,6 @@ class Renk {
                 }
 
                 delete clone[key]
-
-            }else{
-                return error(key)
             }
         })
 
@@ -104,9 +105,6 @@ class Renk {
                 }
 
                 delete clone[key]
-
-            }else{
-                return error(key)
             }
         })
 
