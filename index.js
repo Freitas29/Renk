@@ -65,6 +65,46 @@ class Renk {
 
         return objectRenamed
     }
+
+    /*
+        const animal = {name: "Lion", Height: 1.2}
+
+        const teste = new Renk(animal)
+
+        teste.renameOnly({ Height: "height"})
+
+        // { height: 1.2 }
+
+    */
+
+
+
+    renameOnly(renameKeys = {}){
+        const clone = shallowClone(this.struct)
+        let objectRenamed = {}
+
+        Object.keys(clone).map(key => {
+            if(renameKeys.hasOwnProperty(key)){
+                const newKey = renameKeys[key]
+
+                if(Array.isArray(newKey)){
+
+                    objectRenamed =  newObject({ ...objectRenamed }, changeValueAndKey(newKey, this.struct))
+
+                }else{
+                    const value = this.struct[key]
+
+                    objectRenamed =  newObject({ ...objectRenamed }, changeKey(newKey, value))
+                }
+
+                delete clone[key]
+
+            }
+        })
+
+        return objectRenamed
+    }
+
     
 }
 
