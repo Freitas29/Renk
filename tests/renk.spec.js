@@ -86,3 +86,23 @@ test("Should change key and value and not return rest keys", () => {
         gender: expect.any(String),    
     }))
 })
+
+test("Should throw error when value is not a function in rename function", () => {
+    expect(() => {
+        const anotherObject = new Renk(initialObject)
+        
+        anotherObject.rename({
+            firstName: ["fullName", "Bob foo"]
+        })
+    }).toThrow('Bob foo is not a function');
+})
+
+test("Should throw error when value is not a function in rename only function", () => {
+    expect(() => {
+        const anotherObject = new Renk(initialObject)
+        
+        anotherObject.renameOnly({
+            firstName: ["fullName", "Bob foo"]
+        })
+    }).toThrow('Bob foo is not a function');
+})
