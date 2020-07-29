@@ -106,3 +106,23 @@ test("Should throw error when value is not a function in rename only function", 
         })
     }).toThrow('Bob foo is not a function');
 })
+
+test("Should return the object emtpy when key is not found in rename function", () => {
+    const anotherObject = new Renk(initialObject)
+    
+    const newObject = anotherObject.rename({
+        name: ["name", person => `${person.name} ${person.lastName}`]
+    })
+
+    expect(newObject).toEqual({})
+})
+
+test("Should return the object emtpy when key is not found in rename only function", () => {
+    const anotherObject = new Renk(initialObject)
+    
+    const newObject = anotherObject.renameOnly({
+        name: ["name", person => `${person.name} ${person.lastName}`]
+    })
+
+    expect(newObject).toEqual({})
+})

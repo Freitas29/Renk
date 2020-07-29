@@ -1,4 +1,4 @@
-import { shallowClone } from './utils'
+import { shallowClone } from './utils.js'
 
 const changeKey = (newKey, value) => {
     return {[newKey] : value}
