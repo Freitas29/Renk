@@ -1,4 +1,4 @@
-import { shallowClone } from './utils.js'
+import { shallowClone } from './utils'
 
 const changeKey = (newKey, value) => {
     return {[newKey] : value}
@@ -27,28 +27,6 @@ class Renk {
         this.struct = struct
     }
 
-    /*
-        const animal = {name: "Lion", Height: 1.2}
-
-        const teste = new Renk(animal)
-
-        teste.renameOnly({ name: "Name"})
-
-        // { Name: "Lion", Height: 1.2 }
-
-    */
-
-    /*
-        const person = {firstName: "Luke", lastName: "Skywalker", eyeColor: blue}
-
-        const teste = new Renk(person)
-
-        teste.rename({ Height: ["fullName", person => `${person.firstName} ${person.lastName}`]})
-
-        // { fullName: Luke Skywalker, eyeColor: blue }
-
-    */
-
     rename(renameKeys = {}){
         const clone = shallowClone(this.struct)
         let objectRenamed = {}
@@ -72,19 +50,6 @@ class Renk {
 
         return objectRenamed
     }
-
-    /*
-        const animal = {name: "Lion", Height: 1.2}
-
-        const teste = new Renk(animal)
-
-        teste.renameOnly({ Height: "height"})
-
-        // { height: 1.2 }
-
-    */
-
-
 
     renameOnly(renameKeys = {}){
         const clone = shallowClone(this.struct)
