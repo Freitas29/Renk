@@ -20,10 +20,28 @@ const changeValueAndKey = (newProperty, object) => {
     return changeKey(key, newValue)
 }
 
-export const rename = (baseObject, renameKeys = {}) => {
-    const clone = shallowClone(baseObject)
+const hasKey = keys => keys.length > 0
+
+const removeKeys = (baseObject, keys) => {
+    const baseclone = shallowClone(baseObject)
+    
+    keys.map(key => {
+        if(!baseclone.hasOwnProperty(key)) return
+
+        delete baseclone[key]
+    })
+
+    return baseclone
+}
+
+export const rename = (baseObject, renameKeys = {}, deleteKeys = []) => {
+    let clone = shallowClone(baseObject)
     let objectRenamed = {}
     
+    if(hasKey(deleteKeys)){
+        clone = removeKeys(clone, deleteKeys)
+    }
+
     Object.keys(clone).map(key => {
         if(renameKeys.hasOwnProperty(key)){              
             const newKey = renameKeys[key]

@@ -115,3 +115,24 @@ test("Should return the object emtpy when key is not found in rename only functi
 
     expect(renamedUser).toEqual({})
 })
+
+test("Should rename object and remove keys", () => {
+    const renamedUser = rename(user, {
+        firstName: "name"
+    }, ["f"])
+
+    expect(renamedUser).toEqual(
+        expect.objectContaining({
+            name: expect.any(String),
+            lastName: expect.any(String),
+            age: expect.any(Number),
+            gender: expect.any(String),
+        })
+    )
+
+    expect(renamedUser).toEqual(
+        expect.not.objectContaining({
+            f: expect.any(Array),
+        })
+    )
+})
