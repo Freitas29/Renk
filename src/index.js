@@ -20,63 +20,51 @@ const changeValueAndKey = (newProperty, object) => {
     return changeKey(key, newValue)
 }
 
-const keyNotFound = value => typeof value === "undefined"
-
-class Renk {
-    constructor(struct  = {}){
-        this.struct = struct
-    }
-
-    rename(renameKeys = {}){
-        const clone = shallowClone(this.struct)
-        let objectRenamed = {}
-        
-        Object.keys(clone).map(key => {
-            if(renameKeys.hasOwnProperty(key)){              
-                const newKey = renameKeys[key]
-                
-                const value = this.struct[key]
-                
-
-                if(Array.isArray(newKey)){
-                    objectRenamed = newObject(clone,changeValueAndKey(newKey, this.struct))
-                }else{
-                    objectRenamed = newObject(clone, changeKey(newKey, value))
-                }
-
-                delete clone[key]
-            }
-        })
-
-        return objectRenamed
-    }
-
-    renameOnly(renameKeys = {}){
-        const clone = shallowClone(this.struct)
-        let objectRenamed = {}
-
-        Object.keys(clone).map(key => {
-            if(renameKeys.hasOwnProperty(key)){
-                const newKey = renameKeys[key]
-
-                if(Array.isArray(newKey)){
-
-                    objectRenamed =  newObject({ ...objectRenamed }, changeValueAndKey(newKey, this.struct))
-
-                }else{
-                    const value = this.struct[key]
-
-                    objectRenamed =  newObject({ ...objectRenamed }, changeKey(newKey, value))
-                }
-
-                delete clone[key]
-            }
-        })
-
-        return objectRenamed
-    }
-
+export const rename = (baseObject, renameKeys = {}) => {
+    const clone = shallowClone(baseObject)
+    let objectRenamed = {}
     
+    Object.keys(clone).map(key => {
+        if(renameKeys.hasOwnProperty(key)){              
+            const newKey = renameKeys[key]
+            
+            const value = baseObject[key]
+            
+
+            if(Array.isArray(newKey)){
+                objectRenamed = newObject(clone,changeValueAndKey(newKey, baseObject))
+            }else{
+                objectRenamed = newObject(clone, changeKey(newKey, value))
+            }
+
+            delete clone[key]
+        }
+    })
+
+    return objectRenamed
 }
 
-export default Renk
+export const renameOnly = (baseObject, renameKeys = {}) => {
+    const clone = shallowClone(baseObject)
+    let objectRenamed = {}
+
+    Object.keys(clone).map(key => {
+        if(renameKeys.hasOwnProperty(key)){
+            const newKey = renameKeys[key]
+
+            if(Array.isArray(newKey)){
+
+                objectRenamed =  newObject({ ...objectRenamed }, changeValueAndKey(newKey, baseObject))
+
+            }else{
+                const value = baseObject[key]
+
+                objectRenamed =  newObject({ ...objectRenamed }, changeKey(newKey, value))
+            }
+
+            delete clone[key]
+        }
+    })
+
+    return objectRenamed
+}

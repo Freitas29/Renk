@@ -1,6 +1,6 @@
-import Renk from '../src/index'
+import { rename, renameOnly } from '../src/index'
 
-const initialObject  = {
+const user  = {
     firstName: "Bob",
     lastName: "Foo",
     age: 16,
@@ -15,10 +15,9 @@ const initialObject  = {
 }
 
 test('Should rename key f and return rest', () => {
-    const anotherObject = new Renk(initialObject)
-    const newObject = anotherObject.rename({f: "favoriteFoods"})
+    const renamedUser = rename(user, {f: "favoriteFoods"})
     
-    expect(newObject).toEqual(
+    expect(renamedUser).toEqual(
         expect.objectContaining({
         favoriteFoods: expect.any(Array),
         firstName: expect.any(String),
@@ -26,20 +25,18 @@ test('Should rename key f and return rest', () => {
 });
 
 test('Should rename key f and only favoriteFoods', () => {
-    const anotherObject = new Renk(initialObject)
-    const newObject = anotherObject.renameOnly({f: "favoriteFoods"})
+    const renamedUser = renameOnly(user, {f: "favoriteFoods"})
     
-    expect(newObject).toEqual(
+    expect(renamedUser).toEqual(
         expect.objectContaining({
         favoriteFoods: expect.any(Array),
     }))
 });
 
 test('Should rename only key f and not return rest keys', () => {
-    const anotherObject = new Renk(initialObject)
-    const newObject = anotherObject.renameOnly({f: "favoriteFoods"})
+    const renamedUser = renameOnly(user, {f: "favoriteFoods"})
     
-    expect(newObject).toEqual(
+    expect(renamedUser).toEqual(
         expect.not.objectContaining({
         firstName:  expect.any(String),
         lastName: expect.any(String),
@@ -47,21 +44,20 @@ test('Should rename only key f and not return rest keys', () => {
         gender: expect.any(String),
     }))
 
-    expect(newObject).toEqual(
+    expect(renamedUser).toEqual(
         expect.objectContaining({
         favoriteFoods: expect.any(Array),
     }))
 });
 
 test("Should change key and value and return rest keys", () => {
-    const anotherObject = new Renk(initialObject)
-    const newObject = anotherObject.rename({
+    const renamedUser = rename(user,{
         firstName: ["fullName", person => `${person.name} ${person.lastName}`]
     })
 
-    expect(newObject).toEqual(
+    expect(renamedUser).toEqual(
         expect.objectContaining({
-        fullName: `${initialObject.name} ${initialObject.lastName}`,
+        fullName: `${user.name} ${user.lastName}`,
         lastName: expect.any(String),
         age: expect.any(Number),
         gender: expect.any(String),
@@ -69,17 +65,16 @@ test("Should change key and value and return rest keys", () => {
 })
 
 test("Should change key and value and not return rest keys", () => {
-    const anotherObject = new Renk(initialObject)
-    const newObject = anotherObject.renameOnly({
+    const renamedUser = renameOnly(user, {
         firstName: ["fullName", person => `${person.name} ${person.lastName}`]
     })
 
-    expect(newObject).toEqual(
+    expect(renamedUser).toEqual(
         expect.objectContaining({
-        fullName: `${initialObject.name} ${initialObject.lastName}`,
+        fullName: `${user.name} ${user.lastName}`,
     }))
 
-    expect(newObject).toEqual(
+    expect(renamedUser).toEqual(
         expect.not.objectContaining({
         lastName: expect.any(String),
         age: expect.any(Number),
@@ -88,10 +83,8 @@ test("Should change key and value and not return rest keys", () => {
 })
 
 test("Should throw error when value is not a function in rename function", () => {
-    expect(() => {
-        const anotherObject = new Renk(initialObject)
-        
-        anotherObject.rename({
+    expect(() => {        
+        rename(user, {
             firstName: ["fullName", "Bob foo"]
         })
     }).toThrow('Bob foo is not a function');
@@ -99,30 +92,26 @@ test("Should throw error when value is not a function in rename function", () =>
 
 test("Should throw error when value is not a function in rename only function", () => {
     expect(() => {
-        const anotherObject = new Renk(initialObject)
         
-        anotherObject.renameOnly({
+        renameOnly(user, {
             firstName: ["fullName", "Bob foo"]
         })
     }).toThrow('Bob foo is not a function');
 })
 
 test("Should return the object emtpy when key is not found in rename function", () => {
-    const anotherObject = new Renk(initialObject)
     
-    const newObject = anotherObject.rename({
+    const renamedUser = rename(user, {
         name: ["name", person => `${person.name} ${person.lastName}`]
     })
 
-    expect(newObject).toEqual({})
+    expect(renamedUser).toEqual({})
 })
 
-test("Should return the object emtpy when key is not found in rename only function", () => {
-    const anotherObject = new Renk(initialObject)
-    
-    const newObject = anotherObject.renameOnly({
+test("Should return the object emtpy when key is not found in rename only function", () => {    
+    const renamedUser = renameOnly(user, {
         name: ["name", person => `${person.name} ${person.lastName}`]
     })
 
-    expect(newObject).toEqual({})
+    expect(renamedUser).toEqual({})
 })
