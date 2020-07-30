@@ -36,7 +36,7 @@ const removeKeys = (baseObject, keys) => {
 
 export const rename = (baseObject, renameKeys = {}, deleteKeys = []) => {
     let clone = shallowClone(baseObject)
-    let objectRenamed = {}
+    let renamedObject = {}
     
     if(hasKey(deleteKeys)){
         clone = removeKeys(clone, deleteKeys)
@@ -50,21 +50,21 @@ export const rename = (baseObject, renameKeys = {}, deleteKeys = []) => {
             
 
             if(Array.isArray(newKey)){
-                objectRenamed = newObject(clone,changeValueAndKey(newKey, baseObject))
+                renamedObject = newObject(clone,changeValueAndKey(newKey, baseObject))
             }else{
-                objectRenamed = newObject(clone, changeKey(newKey, value))
+                renamedObject = newObject(clone, changeKey(newKey, value))
             }
 
             delete clone[key]
         }
     })
 
-    return objectRenamed
+    return renamedObject
 }
 
 export const renameOnly = (baseObject, renameKeys = {}) => {
     const clone = shallowClone(baseObject)
-    let objectRenamed = {}
+    let renamedObject = {}
 
     Object.keys(clone).map(key => {
         if(renameKeys.hasOwnProperty(key)){
@@ -72,17 +72,17 @@ export const renameOnly = (baseObject, renameKeys = {}) => {
 
             if(Array.isArray(newKey)){
 
-                objectRenamed =  newObject({ ...objectRenamed }, changeValueAndKey(newKey, baseObject))
+                renamedObject =  newObject({ ...renamedObject }, changeValueAndKey(newKey, baseObject))
 
             }else{
                 const value = baseObject[key]
 
-                objectRenamed =  newObject({ ...objectRenamed }, changeKey(newKey, value))
+                renamedObject =  newObject({ ...renamedObject }, changeKey(newKey, value))
             }
 
             delete clone[key]
         }
     })
 
-    return objectRenamed
+    return renamedObject
 }
