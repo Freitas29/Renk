@@ -1,11 +1,12 @@
 {
   "name": "renk",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Tansforme/renomeie chaves e valores de um objeto",
   "main": "./src/index.js",
   "scripts": {
     "test": "jest --watch"
   },
+  "type": "module",
   "keywords": ["object","rename"],
   "author": "Freitas29",
   "license": "ISC",

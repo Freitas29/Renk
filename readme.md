@@ -1,4 +1,14 @@
+## Instalação
+
+`
+npm install renk
+`
+
 ## Uso
+```js
+  const { rename, renameonly } from 'renk'
+```
+
 
 ```js
 const user = {
