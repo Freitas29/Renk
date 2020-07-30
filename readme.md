@@ -1,6 +1,6 @@
 ## Uso
 
-```
+```js
 const user = {
     firstName: "Bob", 
     lastName: "Foo", age: 16,
@@ -17,7 +17,7 @@ const user = {
 
 Você pode renomear as keys como desejar
 
-```
+```js
 const renamedUser = rename(user, {
   food: "favoriteFoods",
   firtName: "name"
@@ -42,7 +42,7 @@ const renamedUser = rename(user, {
 
 Nesse caso, vamos transformar o objeto e excluir as keys que não desejamos
 
-```
+```js
 const renamedUser = rename(user, {
     food: "favoriteFoods",
     firtName: "name"
@@ -62,9 +62,9 @@ const renamedUser = rename(user, {
 }
 ```
 
-Se você deseja que retorne apenas as renomeadas:
+Retorna apenas as chaves renomeadas:
 
-```
+```js
 renameOnly(user, {
   firstName: ['fullName', person => `${person.firstName} ${person.lastName}`]
 })
@@ -78,7 +78,7 @@ renameOnly(user, {
 
 Podemos alterar as chaves e seus valores passando um array com `[key, function]`
 
-```
+```js
 rename(user, {
   firstName: ['fullName', person => `${person.firstName} ${person.lastName}`]
 }, ["lastName"])
