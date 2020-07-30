@@ -1,1 +1,0 @@
-export const shallowClone = obj => Object.assign({}, obj);

@@ -2,7 +2,7 @@
   "name": "renk",
   "version": "0.5.1",
   "description": "Tansforme/renomeie chaves e valores de um objeto",
-  "main": "./src/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "jest --watch"
   },
