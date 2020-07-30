@@ -1,20 +1,25 @@
 {
   "name": "renk",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.5.0",
+  "description": "Tansforme/renomeie chaves e valores de um objeto",
+  "main": "./src/index.js",
   "scripts": {
     "test": "jest --watch"
   },
-  "keywords": [],
+  "keywords": ["object","rename"],
   "author": "Freitas29",
   "license": "ISC",
   "devDependencies": {
     "jest": "^26.1.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Freitas29/Renk.git"
+  },
   "dependencies": {
     "@babel/core": "^7.10.5",
     "@babel/preset-env": "^7.10.4",
     "babel-jest": "^26.1.0"
-  }
+  },
+  "homepage": "https://github.com/Freitas29/Renk#readme"
 }
