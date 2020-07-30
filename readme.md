@@ -30,7 +30,7 @@ Você pode renomear as keys como desejar
 ```js
 const renamedUser = rename(user, {
   food: "favoriteFoods",
-  firtName: "name"
+  firstName: "name"
 })
     
 /*
@@ -55,7 +55,7 @@ Nesse caso, vamos transformar o objeto e excluir as keys que não desejamos
 ```js
 const renamedUser = rename(user, {
     food: "favoriteFoods",
-    firtName: "name"
+    firstName: "name"
   }, ['gender', 'age', 'lastName'])
 
   /*
