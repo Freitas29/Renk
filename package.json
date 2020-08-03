@@ -1,6 +1,6 @@
 {
   "name": "renk",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "Tansforme/renomeie chaves e valores de um objeto",
   "main": "src/index.js",
   "scripts": {
