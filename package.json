@@ -7,19 +7,27 @@
     "test": "jest --watch"
   },
   "type": "module",
-  "keywords": ["object","rename"],
+  "files": [
+    "src/index.js",
+    "types/index.d.ts",
+    "LICENSE"
+  ],
+  "keywords": [
+    "object",
+    "rename"
+  ],
   "author": "Freitas29",
   "license": "ISC",
   "devDependencies": {
     "jest": "^26.1.0",
     "@babel/core": "^7.10.5",
     "@babel/preset-env": "^7.10.4",
-    "babel-jest": "^26.1.0"
+    "babel-jest": "^26.1.0",
+    "typescript": "^3.9.7"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Freitas29/Renk.git"
   },
-  "dependencies": {},
   "homepage": "https://github.com/Freitas29/Renk#readme"
 }
