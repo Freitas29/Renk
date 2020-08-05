@@ -1,10 +1,10 @@
-## Instalação
+## 🌠 Instalação
 
 `
 npm install renk
 `
 
-## Uso
+## 🚩 Uso
 ```js
   const { rename, renameonly } from 'renk'
 ```
@@ -25,7 +25,7 @@ const user = {
 }   
 ```
 
-Você pode renomear as keys como desejar
+Renomenado as keys do objeto `user`
 
 ```js
 const renamedUser = rename(user, {
@@ -50,7 +50,7 @@ const renamedUser = rename(user, {
 */
 ```
 
-Nesse caso, vamos transformar o objeto e excluir as keys que não desejamos
+Nesse caso, vamos transformar o objeto `user` e excluir as keys que não desejamos
 
 ```js
 const renamedUser = rename(user, {
@@ -86,7 +86,7 @@ renameOnly(user, {
 */
 ```
 
-Podemos alterar as chaves e seus valores passando um array com `[key, function]`
+Alterando as keys e transformando os valores passando um array com `[key, function]` e removendo a propriedade `lastName` do objeto `user`
 
 ```js
 rename(user, {
