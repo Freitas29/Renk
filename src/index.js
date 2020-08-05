@@ -73,12 +73,15 @@ export const rename = (baseObject, renameKeys = {}, deleteKeys = []) => {
 
         const result = reshapArray(clone, renameKeys)
 
-        return removeArrayKeys(result, deleteKeys)
+        if(hasKey(deleteKeys)) return removeArrayKeys(result, deleteKeys)
+
+        return result
+        
     }else{
         let clone = shallowClone(baseObject)
 
-        clone = removeKeys(clone, deleteKeys)
-
+        if(hasKey(deleteKeys)) clone = removeKeys(clone, deleteKeys)
+        
         return reshap({ baseObject, clone, renameKeys })
     }
 }
