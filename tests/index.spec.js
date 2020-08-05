@@ -136,3 +136,21 @@ test("Should rename object and remove keys", () => {
         })
     )
 })
+
+const foods = [
+    {n: "rice", price: 16.50},
+    {n: "onion", price: 5.00}
+]
+
+test("Should rename a array of object", () => {
+    const reshaped = rename(foods, {n: "name"})
+    
+    const expected = [
+        {name: "rice", price: 16.50},
+        {name: "onion", price: 5.00}
+    ]
+    
+    expect(reshaped).toEqual(
+        expect.arrayContaining(expected)
+    )
+})
