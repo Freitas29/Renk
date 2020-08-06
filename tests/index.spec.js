@@ -14,7 +14,7 @@ const user  = {
     }]
 }
 
-test('Should rename key f and return rest', () => {
+test('Should reshap key f and return rest', () => {
     const renamedUser = rename(user, {f: "favoriteFoods"})
     
     expect(renamedUser).toEqual(
@@ -24,7 +24,7 @@ test('Should rename key f and return rest', () => {
     }))
 });
 
-test('Should rename key f and only favoriteFoods', () => {
+test('Should reshap key f and only favoriteFoods', () => {
     const renamedUser = renameOnly(user, {f: "favoriteFoods"})
     
     expect(renamedUser).toEqual(
@@ -33,7 +33,7 @@ test('Should rename key f and only favoriteFoods', () => {
     }))
 });
 
-test('Should rename only key f and not return rest keys', () => {
+test('Should reshap only key f and not return rest keys', () => {
     const renamedUser = renameOnly(user, {f: "favoriteFoods"})
     
     expect(renamedUser).toEqual(
@@ -116,7 +116,7 @@ test("Should return the object emtpy when key is not found in rename only functi
     expect(renamedUser).toEqual({})
 })
 
-test("Should rename object and remove keys", () => {
+test("Should reshap object and remove keys", () => {
     const renamedUser = rename(user, {
         firstName: "name"
     }, ["f"])
@@ -142,7 +142,7 @@ const foods = [
     {n: "onion", price: 5.00}
 ]
 
-test("Should rename a array of object", () => {
+test("Should reshap a array of object", () => {
     const reshaped = rename(foods, {n: "name"})
     
     const expected = [
@@ -155,7 +155,7 @@ test("Should rename a array of object", () => {
     )
 })
 
-test("Should rename a array and delete a key", () => {
+test("Should reshap a array and delete a key", () => {
     const reshaped = rename(foods, {n: "name"}, ["price"])
     
     const expected = [
@@ -163,6 +163,19 @@ test("Should rename a array and delete a key", () => {
         {name: "onion"}
     ]
     
+    expect(reshaped).toEqual(
+        expect.arrayContaining(expected)
+    )
+})
+
+test("Should reshap a array and return only keys reshaped", () => {
+    const reshaped = renameOnly(foods, {n: "name"})
+    
+    const expected = [
+        {name: "rice"},
+        {name: "onion"}
+    ]
+
     expect(reshaped).toEqual(
         expect.arrayContaining(expected)
     )
