@@ -193,3 +193,21 @@ test("Should return a object reshaped with delete key that is not exists", () =>
 
     expect(reshaped).toStrictEqual(expected)
 })
+
+
+test("Should return the empty object when params is not received in rename", () => {
+    const oldUser = JSON.parse(JSON.stringify(user))
+    const reshaped = rename(user)
+
+    expect(reshaped).toStrictEqual({})    
+    expect(user).toStrictEqual(oldUser)
+
+})
+
+test("Should return the empty object when params is not received in renameOnly", () => {
+    const oldUser = JSON.parse(JSON.stringify(user))
+    const reshaped = renameOnly(user)
+
+    expect(reshaped).toStrictEqual({})    
+    expect(user).toStrictEqual(oldUser)
+})
