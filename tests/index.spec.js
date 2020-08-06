@@ -181,6 +181,19 @@ test("Should reshap a array and return only keys reshaped", () => {
     )
 })
 
+test("Should reshap a array with keys and values and return only keys reshaped", () => {
+    const reshaped = renameOnly(foods, {n: ["name", item => `${item.n} - ${item.price}`]})
+    
+    const expected = [
+        {name: `rice - ${16.50}`},
+        {name: `onion - ${5.00}`}
+    ]
+
+    expect(reshaped).toEqual(
+        expect.arrayContaining(expected)
+    )
+})
+
 test("Should return a object reshaped with delete key that is not exists", () => {
     const reshaped = rename(user, {firstName: "name"}, ["nome", "f"])
     
