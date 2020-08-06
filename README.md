@@ -25,7 +25,7 @@ const user = {
 }   
 ```
 
-Renomenado as keys do objeto `user`
+Renomeando as keys do objeto `user`
 
 ```js
 const renamedUser = rename(user, {
@@ -72,7 +72,7 @@ const renamedUser = rename(user, {
 }
 ```
 
-Retorna apenas as chaves renomeadas:
+Retornar apenas as keys renomeadas:
 
 ```js
 renameOnly(user, {
@@ -98,7 +98,7 @@ rename(user, {
 */
 ```
 
-`rename` e `renameOnly` podem receber um array como primeiro argumento podendo atualizar todas a estrutura
+`rename` e `renameOnly` podem receber um array como primeiro argumento podendo atualizar toda a estrutura
 
 ```js
 const foods = [
