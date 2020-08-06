@@ -34,15 +34,10 @@ const removeKeys = (baseObject, keys) => {
     return baseclone
 }
 
-export const rename = (baseObject, renameKeys = {}, deleteKeys = []) => {
-    let clone = shallowClone(baseObject)
+const reshap = ({ baseObject, clone, renameKeys} ) => {
     let renamedObject = {}
-    
-    if(hasKey(deleteKeys)){
-        clone = removeKeys(clone, deleteKeys)
-    }
 
-    Object.keys(clone).map(key => {
+    Object.keys(baseObject).map(key => {
         if(renameKeys.hasOwnProperty(key)){              
             const newKey = renameKeys[key]
             
@@ -62,8 +57,7 @@ export const rename = (baseObject, renameKeys = {}, deleteKeys = []) => {
     return renamedObject
 }
 
-export const renameOnly = (baseObject, renameKeys = {}) => {
-    const clone = shallowClone(baseObject)
+const reshapOnly = ({ clone, renameKeys, baseObject }) => {
     let renamedObject = {}
 
     Object.keys(clone).map(key => {
@@ -85,4 +79,51 @@ export const renameOnly = (baseObject, renameKeys = {}) => {
     })
 
     return renamedObject
+}
+
+const removeArrayKeys = (baseArray, deleteKeys) => baseArray.map(object => removeKeys(object, deleteKeys)) 
+
+const reshapArray = (baseArray, renameKeys) => {
+    return baseArray.map(object => {
+        const clone = shallowClone(object)
+        
+        return reshap({ baseObject: object, clone, renameKeys })
+    })
+}
+
+const reshapArrayOnly = (baseArray, renameKeys) => {
+    return baseArray.map(object => {
+        const clone = shallowClone(object)
+        
+        return reshapOnly({ baseObject: object, clone, renameKeys })
+    })
+}
+
+export const rename = (baseObject, renameKeys = {}, deleteKeys = []) => {
+    if(Array.isArray(baseObject)){
+        const clone = Array.from((baseObject))
+
+        const result = reshapArray(clone, renameKeys)
+
+        if(hasKey(deleteKeys)) return removeArrayKeys(result, deleteKeys)
+
+        return result
+        
+    }else{
+        let clone = shallowClone(baseObject)
+
+        if(hasKey(deleteKeys)) clone = removeKeys(clone, deleteKeys)
+        
+        return reshap({ baseObject, clone, renameKeys })
+    }
+}
+
+export const renameOnly = (baseObject, renameKeys = {}) => {
+    if(Array.isArray(baseObject)){
+        const clone = Array.from((baseObject))
+        return reshapArrayOnly(clone, renameKeys)
+    }else{
+        const clone = shallowClone(baseObject)
+        return reshapOnly({ baseObject, renameKeys, clone })
+    }
 }
