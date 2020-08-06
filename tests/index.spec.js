@@ -180,3 +180,16 @@ test("Should reshap a array and return only keys reshaped", () => {
         expect.arrayContaining(expected)
     )
 })
+
+test("Should return a object reshaped with delete key that is not exists", () => {
+    const reshaped = rename(user, {firstName: "name"}, ["nome", "f"])
+    
+    const expected = {
+        age: 16,
+        gender: "male",
+        lastName: "Foo",
+        name: "Bob"
+    }
+
+    expect(reshaped).toStrictEqual(expected)
+})
