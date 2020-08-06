@@ -97,3 +97,39 @@ rename(user, {
   {age: 16, gender: "male", food: Array(3), fullName: "Bob Foo"}
 */
 ```
+
+`rename` e `renameOnly` podem receber um array como primeiro argumento podendo atualizar todas a estrutura
+
+```js
+const foods = [
+  {n: "rice", price: 16.50},
+  {n: "onion", price: 5.00}
+]
+
+rename(foods, {n: "name"})
+
+/*
+  [
+    {name: "rice", price: 16.50},
+    {name: "onion", price: 5.00}
+  ]
+*/
+
+```
+
+```js
+const foods = [
+  {n: "rice", price: 16.50},
+  {n: "onion", price: 5.00}
+]
+
+renameOnly(foods, {n: "name"})
+
+/*
+  [
+    {name: "rice"},
+    {name: "onion"}
+  ]
+*/
+
+```
