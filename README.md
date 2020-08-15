@@ -1,3 +1,5 @@
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/77b9676cf9ed4aa4b3dec926e32462fa)](https://www.codacy.com/manual/Freitas29/Renk?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Freitas29/Renk&amp;utm_campaign=Badge_Grade)
+
 ## 🌠 Instalação
 
 `
