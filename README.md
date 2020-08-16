@@ -2,6 +2,8 @@
 
 ## 🌠 Instalação
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c05068d0c16e493cb5d3816044c0c588)](https://app.codacy.com/manual/Freitas29/Renk?utm_source=github.com&utm_medium=referral&utm_content=Freitas29/Renk&utm_campaign=Badge_Grade_Dashboard)
+
 `
 npm install renk
 `
